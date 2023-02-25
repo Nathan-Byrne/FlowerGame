@@ -1,6 +1,6 @@
 /// <summary>
-/// @author Peter Lowe
-/// @date May 2019
+/// @author Nathan Byrne
+/// @date Feb 2023
 ///
 /// you need to change the above lines or lose marks
 /// </summary>
@@ -17,7 +17,7 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Flower Game by Nathan Byrne" },
 	m_exitGame{false} //when true game will exit
 {
 	setupFontAndText(); // load font 
@@ -112,13 +112,16 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 
+	// Title Screen (Commented until graphic mode is created)
+	// m_window.draw(m_title); // Render Title BG
+	// m_window.draw(m_titleText); // Render Title Text
+
 	// Non-Graphic Renders
-	m_window.draw(m_flowerHitbox);
-	m_window.draw(m_backgroundS);
+	m_window.draw(m_backgroundS); // Render Background
+	m_window.draw(m_flowerHitbox); // Render Flower Hitbox
 
 	// REMOVE BELOW
-	 m_window.draw(m_welcomeMessage);
-	 m_window.draw(m_logoSprite);
+	m_window.draw(m_logoSprite);
 
 
 	m_window.display();
@@ -129,22 +132,8 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-
-
-	// REMOVE STUFF BELOW
-
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
-	{
-		std::cout << "problem loading arial black font" << std::endl;
-	}
-	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("Flower Game");
-	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_welcomeMessage.setPosition(40.0f, 40.0f);
-	m_welcomeMessage.setCharacterSize(80U);
-	m_welcomeMessage.setOutlineColor(sf::Color::Red);
-	m_welcomeMessage.setFillColor(sf::Color::Black);
-	m_welcomeMessage.setOutlineThickness(3.0f);
+	// Call Setup Functions
+	setupTitleText();
 
 }
 
@@ -155,6 +144,8 @@ void Game::setupSprite()
 {
 	// Call Setup Functions
 	setupFlowerHitbox();
+	setupTitle();
+
 
 	// Possible Backgrounds:
 	// purpleBG.jpg
@@ -185,4 +176,28 @@ void Game::setupFlowerHitbox()
 	m_flowerHitbox.setSize(sf::Vector2f{ 32.0f,100.0f }); // Size of flower hitbox 
 	m_flowerHitboxL = sf::Vector2f{ 420.0f,545.0f }; // Location of flower
 	m_flowerHitbox.setPosition(m_flowerHitboxL);
+}
+
+void Game::setupTitle()
+{
+	// Temp Background
+	m_title.setFillColor(sf::Color::Black);
+	m_title.setSize(sf::Vector2f{ 800.0f,600.0f });
+
+}
+
+void Game::setupTitleText()
+{
+	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
+	{
+		std::cout << "Problem loading arial black font" << std::endl;
+	}
+	m_titleText.setFont(m_ArialBlackfont);
+	m_titleText.setString("Flower Game");
+	m_titleText.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
+	m_titleText.setPosition(40.0f, 40.0f);
+	m_titleText.setCharacterSize(80U);
+	m_titleText.setOutlineColor(sf::Color::Red);
+	m_titleText.setFillColor(sf::Color::Black);
+	m_titleText.setOutlineThickness(3.0f);
 }

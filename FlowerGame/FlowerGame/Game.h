@@ -1,5 +1,5 @@
 /// <summary>
-/// author Pete Lowe May 2019
+/// author Nathan Byrne Feb 2023
 /// you need to change the above line or lose marks
 /// </summary>
 #ifndef GAME_HPP
@@ -28,9 +28,13 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupFontAndText();
+	// Setup Fonts + Sprites
 	void setupSprite();
 	void setupFlowerHitbox();
+	void setupTitle();
+
+	void setupFontAndText();
+	void setupTitleText();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
@@ -39,6 +43,13 @@ private:
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
 
+
+
+	// Title Screen (Non-Graphic + Graphic)
+	sf::RectangleShape m_title;
+	sf::Vector2f m_titleL;
+	sf::Text m_titleText;
+	
 	// Background (Graphic)
 	sf::Texture m_backgroundT;
 	sf::Sprite m_backgroundS;
