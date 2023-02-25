@@ -111,8 +111,16 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
-	m_window.draw(m_logoSprite);
+
+	// Non-Graphic Renders
+	m_window.draw(m_flowerHitbox);
+	m_window.draw(m_backgroundS);
+
+	// REMOVE BELOW
+	 m_window.draw(m_welcomeMessage);
+	 m_window.draw(m_logoSprite);
+
+
 	m_window.display();
 }
 
@@ -121,12 +129,16 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
+
+
+	// REMOVE STUFF BELOW
+
 	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
 	{
 		std::cout << "problem loading arial black font" << std::endl;
 	}
 	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("SFML Game");
+	m_welcomeMessage.setString("Flower Game");
 	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
 	m_welcomeMessage.setPosition(40.0f, 40.0f);
 	m_welcomeMessage.setCharacterSize(80U);
@@ -141,6 +153,23 @@ void Game::setupFontAndText()
 /// </summary>
 void Game::setupSprite()
 {
+	// Call Setup Functions
+	setupFlowerHitbox();
+
+	// Possible Backgrounds:
+	// purpleBG.jpg
+	// grassSky.jpg (maybe)
+	// stoneBG.jpg (best)
+
+	// Load Background
+	if (!m_backgroundT.loadFromFile("ASSETS\\IMAGES\\stoneBG.jpg"))
+	{
+		std::cout << "Problem loading background" << std::endl;
+	}
+	m_backgroundS.setTexture(m_backgroundT);
+	
+
+	// REMOVE STUFF BELOW
 	if (!m_logoTexture.loadFromFile("ASSETS\\IMAGES\\SFML-LOGO.png"))
 	{
 		// simple error message if previous call fails
@@ -148,4 +177,12 @@ void Game::setupSprite()
 	}
 	m_logoSprite.setTexture(m_logoTexture);
 	m_logoSprite.setPosition(300.0f, 180.0f);
+}
+
+void Game::setupFlowerHitbox()
+{
+	m_flowerHitbox.setFillColor(sf::Color::Green); // Colour of hitbox (Non-graphic only)
+	m_flowerHitbox.setSize(sf::Vector2f{ 32.0f,100.0f }); // Size of flower hitbox 
+	m_flowerHitboxL = sf::Vector2f{ 420.0f,545.0f }; // Location of flower
+	m_flowerHitbox.setPosition(m_flowerHitboxL);
 }
