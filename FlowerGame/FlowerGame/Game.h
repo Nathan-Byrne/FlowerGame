@@ -32,6 +32,7 @@ private:
 	void setupSprite();
 	void setupFlowerHitbox();
 	void setupTitle();
+	void setupBallEnemy();
 
 	void setupFontAndText();
 	void setupTitleText();
@@ -46,12 +47,18 @@ private:
 	// Others
 	bool m_graphicMode{ false };
 
-	// Title Screen (Non-Graphic + Graphic)
+	// Title Screen
 	bool m_titleScreen{ true };
 
 	sf::RectangleShape m_title;
-	sf::Vector2f m_titleL;
 	sf::Text m_titleText;
+
+	sf::RectangleShape m_displayBox1;
+	sf::Text m_displayText1;
+	sf::Text m_graphicText;
+
+	sf::RectangleShape m_displayBox2;
+	sf::Text m_displayText2;
 	
 	// Background (Graphic)
 	sf::Texture m_backgroundT;
@@ -60,6 +67,9 @@ private:
 	// Flower (Non-Graphic)
 	sf::RectangleShape m_flowerHitbox;
 	sf::Vector2f m_flowerHitboxL;
+
+	// Cannonball Enemy (Non-Graphic)
+	sf::CircleShape m_ball;
 
 };
 

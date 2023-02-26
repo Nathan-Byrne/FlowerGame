@@ -99,7 +99,7 @@ void Game::processKeys(sf::Event t_event)
 		{
 			m_titleScreen = false;
 		}
-		if (sf::Keyboard::Num9 == t_event.key.code) // Enable/ disable graphic mode (via num 9)
+		if (sf::Keyboard::F1 == t_event.key.code) // Enable/ disable graphic mode (via F1)
 		{
 			m_graphicMode = !m_graphicMode;
 		}
@@ -116,6 +116,10 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	if (m_titleScreen) // Constantly check for graphic toggle
+	{
+		setupTitleText();
+	}
 }
 
 /// <summary>
@@ -129,6 +133,13 @@ void Game::render()
 	{
 	    m_window.draw(m_title); // Render Title BG
 	    m_window.draw(m_titleText); // Render Title Text
+		// Display Display Boxes
+		m_window.draw(m_displayBox1);
+		m_window.draw(m_displayText1);
+		m_window.draw(m_graphicText);
+
+		m_window.draw(m_displayBox2);
+		m_window.draw(m_displayText2);
 	}
 	else // Game
 	{
@@ -141,11 +152,12 @@ void Game::render()
 			// Non-Graphic Renders
 			m_window.draw(m_backgroundS); // Render Background
 			m_window.draw(m_flowerHitbox); // Render Flower Hitbox
+			m_window.draw(m_ball); // Render Ball/ Projectile
 		}
 	}
 
 	// REMOVE BELOW
-	m_window.draw(m_logoSprite);
+	// m_window.draw(m_logoSprite);
 
 
 	m_window.display();
@@ -169,7 +181,7 @@ void Game::setupSprite()
 	// Call Setup Functions
 	setupFlowerHitbox();
 	setupTitle();
-
+	setupBallEnemy();
 
 	// Possible Backgrounds:
 	// purpleBG.jpg
@@ -202,12 +214,28 @@ void Game::setupFlowerHitbox()
 	m_flowerHitbox.setPosition(m_flowerHitboxL);
 }
 
+void Game::setupBallEnemy()
+{
+	m_ball.setFillColor(sf::Color::Black); // Colour
+	m_ball.setRadius(10.0f); // Radius
+	m_ball.setOrigin(10.0f, 10.0f); // Origin
+	m_ball.setPosition(100.0f, 100.0f); // Temp
+}
+
 void Game::setupTitle()
 {
 	// Temp Background
 	m_title.setFillColor(sf::Color::Black);
 	m_title.setSize(sf::Vector2f{ 800.0f,600.0f });
 
+	// Display Boxes
+	m_displayBox1.setFillColor(sf::Color::Red);
+	m_displayBox1.setSize(sf::Vector2f{600.0f,100.0f});
+	m_displayBox1.setPosition(100.0f, 175.0f);
+
+	m_displayBox2.setFillColor(sf::Color::Red);
+	m_displayBox2.setSize(sf::Vector2f{ 600.0f,100.0f });
+	m_displayBox2.setPosition(100.0f, 350.0f);
 }
 
 void Game::setupTitleText()
@@ -219,9 +247,40 @@ void Game::setupTitleText()
 	m_titleText.setFont(m_ArialBlackfont);
 	m_titleText.setString("Flower Game");
 	m_titleText.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_titleText.setPosition(40.0f, 40.0f);
+	m_titleText.setPosition(100.0f, 20.0f);
 	m_titleText.setCharacterSize(80U);
 	m_titleText.setOutlineColor(sf::Color::Red);
 	m_titleText.setFillColor(sf::Color::Black);
 	m_titleText.setOutlineThickness(3.0f);
+
+	// Display Box 1
+	m_displayText1.setFont(m_ArialBlackfont);
+	m_displayText1.setString("Graphic Mode: ");
+	m_displayText1.setPosition(110.0f, 195.0f);
+	m_displayText1.setCharacterSize(40U);
+	m_displayText1.setOutlineColor(sf::Color::Black);
+	m_displayText1.setFillColor(sf::Color::Yellow);
+	m_displayText1.setOutlineThickness(3.0f);
+
+	// Graphic Mode Toggle
+	if (m_graphicMode == true) // Graphic Mode Enabled
+	{
+		m_graphicText.setFont(m_ArialBlackfont);
+		m_graphicText.setString("On");
+		m_graphicText.setPosition(440.0f, 195.0f);
+		m_graphicText.setCharacterSize(40U);
+		m_graphicText.setOutlineColor(sf::Color::Black);
+		m_graphicText.setFillColor(sf::Color::Yellow);
+		m_graphicText.setOutlineThickness(3.0f);
+	}
+	else // Graphic Mode Disabled
+	{
+		m_graphicText.setFont(m_ArialBlackfont);
+		m_graphicText.setString("Off");
+		m_graphicText.setPosition(440.0f, 195.0f);
+		m_graphicText.setCharacterSize(40U);
+		m_graphicText.setOutlineColor(sf::Color::Black);
+		m_graphicText.setFillColor(sf::Color::Yellow);
+		m_graphicText.setOutlineThickness(3.0f); 
+	}
 }
