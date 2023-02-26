@@ -91,6 +91,19 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+
+	// Only works on Title Screen
+	if (m_titleScreen == true)
+	{
+		if (sf::Keyboard::Space == t_event.key.code) // Enter game, remove title screen
+		{
+			m_titleScreen = false;
+		}
+		if (sf::Keyboard::Num9 == t_event.key.code) // Enable/ disable graphic mode (via num 9)
+		{
+			m_graphicMode = !m_graphicMode;
+		}
+	}
 }
 
 /// <summary>
@@ -112,13 +125,24 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 
-	// Title Screen (Commented until graphic mode is created)
-	// m_window.draw(m_title); // Render Title BG
-	// m_window.draw(m_titleText); // Render Title Text
+	if (m_titleScreen == true) // Title Screen 
+	{
+	    m_window.draw(m_title); // Render Title BG
+	    m_window.draw(m_titleText); // Render Title Text
+	}
+	else // Game
+	{
+		if (m_graphicMode == true) // Graphic Mode On
+		{
 
-	// Non-Graphic Renders
-	m_window.draw(m_backgroundS); // Render Background
-	m_window.draw(m_flowerHitbox); // Render Flower Hitbox
+		}
+		else // Graphic Mode Off
+		{
+			// Non-Graphic Renders
+			m_window.draw(m_backgroundS); // Render Background
+			m_window.draw(m_flowerHitbox); // Render Flower Hitbox
+		}
+	}
 
 	// REMOVE BELOW
 	m_window.draw(m_logoSprite);

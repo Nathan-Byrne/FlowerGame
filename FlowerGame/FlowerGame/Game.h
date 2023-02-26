@@ -43,9 +43,12 @@ private:
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
 
-
+	// Others
+	bool m_graphicMode{ false };
 
 	// Title Screen (Non-Graphic + Graphic)
+	bool m_titleScreen{ true };
+
 	sf::RectangleShape m_title;
 	sf::Vector2f m_titleL;
 	sf::Text m_titleText;
