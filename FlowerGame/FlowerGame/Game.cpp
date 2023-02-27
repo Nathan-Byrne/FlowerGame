@@ -17,7 +17,7 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Flower Game by Nathan Byrne" },
+	m_window{ sf::VideoMode{ SCREEN_WIDTH, SCREEN_HEIGHT, 32U }, "Flower Game by Nathan Byrne" },
 	m_exitGame{false} //when true game will exit
 {
 	setupFontAndText(); // load font 
@@ -143,6 +143,7 @@ void Game::render()
 
 		m_window.draw(m_displayBox3);
 		m_window.draw(m_displayText3);
+		// m_window.draw(m_difficulty);
 	}
 	else // Game
 	{
@@ -154,7 +155,11 @@ void Game::render()
 		{
 			// Non-Graphic Renders
 			m_window.draw(m_backgroundS); // Render Background
-			m_window.draw(m_flowerHitbox); // Render Flower Hitbox
+			// Render Flower Hitboxs
+			m_window.draw(m_flowerHitbox1); 
+			m_window.draw(m_flowerHitbox2);
+			m_window.draw(m_flowerHitbox3);
+			m_window.draw(m_flowerHitbox4);
 			m_window.draw(m_ball); // Render Ball/ Projectile
 		}
 	}
@@ -211,10 +216,31 @@ void Game::setupSprite()
 
 void Game::setupFlowerHitbox()
 {
-	m_flowerHitbox.setFillColor(sf::Color::Green); // Colour of hitbox (Non-graphic only)
-	m_flowerHitbox.setSize(sf::Vector2f{ 32.0f,100.0f }); // Size of flower hitbox 
-	m_flowerHitboxL = sf::Vector2f{ 420.0f,545.0f }; // Location of flower
-	m_flowerHitbox.setPosition(m_flowerHitboxL);
+	// Hitbox 1
+	m_flowerHitbox1.setFillColor(sf::Color::Green); // Colour of hitbox (Non-graphic only)
+	m_flowerHitbox1.setSize(sf::Vector2f{ 32.0f,100.0f }); // Size of flower hitbox 
+	m_flowerHitbox1L = sf::Vector2f{ (SCREEN_WIDTH / 5) - 16.0f,545.0f }; // Location of flower
+	m_flowerHitbox1.setPosition(m_flowerHitbox1L);
+
+	// Hitbox 2
+	m_flowerHitbox2.setFillColor(sf::Color::Yellow); 
+	m_flowerHitbox2.setSize(sf::Vector2f{ 32.0f,100.0f });  
+	m_flowerHitbox2L = sf::Vector2f{ ((SCREEN_WIDTH / 5) * 2) - 16.0f,545.0f };
+	m_flowerHitbox2.setPosition(m_flowerHitbox2L);
+
+	// Hitbox 3
+	m_flowerHitbox3.setFillColor(sf::Color::Blue); 
+	m_flowerHitbox3.setSize(sf::Vector2f{ 32.0f,100.0f });  
+	m_flowerHitbox3L = sf::Vector2f{ ((SCREEN_WIDTH / 5) * 3) - 16.0f,545.0f };
+	m_flowerHitbox3.setPosition(m_flowerHitbox3L);
+
+	// Hitbox 4
+	m_flowerHitbox4.setFillColor(sf::Color::Magenta); 
+	m_flowerHitbox4.setSize(sf::Vector2f{ 32.0f,100.0f }); 
+	m_flowerHitbox4L = sf::Vector2f{ ((SCREEN_WIDTH / 5) * 4) - 16.0f,545.0f };
+	m_flowerHitbox4.setPosition(m_flowerHitbox4L);
+
+	// SCREEN_WIDTH/5
 }
 
 void Game::setupBallEnemy()
@@ -238,7 +264,11 @@ void Game::setupTitle()
 
 	m_displayBox2.setFillColor(sf::Color::Red);
 	m_displayBox2.setSize(sf::Vector2f{ 600.0f,100.0f });
-	m_displayBox2.setPosition(100.0f, 350.0f);
+	m_displayBox2.setPosition(100.0f, 425.0f);
+
+	m_displayBox3.setFillColor(sf::Color::Red);
+	m_displayBox3.setSize(sf::Vector2f{ 600.0f,100.0f });
+	m_displayBox3.setPosition(100.0f, 300.0f);
 }
 
 void Game::setupTitleText()
@@ -280,7 +310,7 @@ void Game::setupTitleText()
 	{
 		m_graphicText.setFont(m_ArialBlackfont);
 		m_graphicText.setString("Off");
-		m_graphicText.setPosition(440.0f, 197.0f);
+		m_graphicText.setPosition(440.0f, 195.0f);
 		m_graphicText.setCharacterSize(40U);
 		m_graphicText.setOutlineColor(sf::Color::Black);
 		m_graphicText.setFillColor(sf::Color::Yellow);
@@ -290,9 +320,32 @@ void Game::setupTitleText()
 	// Start Game
 	m_displayText2.setFont(m_ArialBlackfont);
 	m_displayText2.setString("Press Space to Start Game ");
-	m_displayText2.setPosition(110.0f, 375.0f);
+	m_displayText2.setPosition(110.0f, 450.0f);
 	m_displayText2.setCharacterSize(40U);
 	m_displayText2.setOutlineColor(sf::Color::Black);
 	m_displayText2.setFillColor(sf::Color::Yellow);
 	m_displayText2.setOutlineThickness(3.0f);
+
+	// Difficulty Change
+	m_displayText3.setFont(m_ArialBlackfont);
+	m_displayText3.setString("Difficulty: ");
+	m_displayText3.setPosition(110.0f, 325.0f);
+	m_displayText3.setCharacterSize(40U);
+	m_displayText3.setOutlineColor(sf::Color::Black);
+	m_displayText3.setFillColor(sf::Color::Yellow);
+	m_displayText3.setOutlineThickness(3.0f);
+
+	// Do later
+	if (m_difficulty == "Easy")
+	{
+
+	}
+	else if (m_difficulty == "Medium")
+	{
+
+	}
+	else // Hard
+	{
+
+	}
 }

@@ -11,6 +11,9 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+
 class Game
 {
 public:
@@ -62,15 +65,21 @@ private:
 
 	sf::RectangleShape m_displayBox3;
 	sf::Text m_displayText3;
+	std::string m_difficulty{ "Easy" }; // cover screen for hard
 	
 	// Background (Graphic)
 	sf::Texture m_backgroundT;
 	sf::Sprite m_backgroundS;
 
 	// Flower (Non-Graphic)
-	sf::RectangleShape m_flowerHitbox;
-	sf::Vector2f m_flowerHitboxL;
-
+	sf::RectangleShape m_flowerHitbox1;
+	sf::Vector2f m_flowerHitbox1L;
+	sf::RectangleShape m_flowerHitbox2;
+	sf::Vector2f m_flowerHitbox2L; 
+	sf::RectangleShape m_flowerHitbox3;
+	sf::Vector2f m_flowerHitbox3L; 
+	sf::RectangleShape m_flowerHitbox4;
+	sf::Vector2f m_flowerHitbox4L;
 	// Cannonball Enemy (Non-Graphic)
 	sf::CircleShape m_ball;
 
