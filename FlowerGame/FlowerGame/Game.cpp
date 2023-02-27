@@ -140,6 +140,9 @@ void Game::render()
 
 		m_window.draw(m_displayBox2);
 		m_window.draw(m_displayText2);
+
+		m_window.draw(m_displayBox3);
+		m_window.draw(m_displayText3);
 	}
 	else // Game
 	{
@@ -277,10 +280,19 @@ void Game::setupTitleText()
 	{
 		m_graphicText.setFont(m_ArialBlackfont);
 		m_graphicText.setString("Off");
-		m_graphicText.setPosition(440.0f, 195.0f);
+		m_graphicText.setPosition(440.0f, 197.0f);
 		m_graphicText.setCharacterSize(40U);
 		m_graphicText.setOutlineColor(sf::Color::Black);
 		m_graphicText.setFillColor(sf::Color::Yellow);
 		m_graphicText.setOutlineThickness(3.0f); 
 	}
+
+	// Start Game
+	m_displayText2.setFont(m_ArialBlackfont);
+	m_displayText2.setString("Press Space to Start Game ");
+	m_displayText2.setPosition(110.0f, 375.0f);
+	m_displayText2.setCharacterSize(40U);
+	m_displayText2.setOutlineColor(sf::Color::Black);
+	m_displayText2.setFillColor(sf::Color::Yellow);
+	m_displayText2.setOutlineThickness(3.0f);
 }

@@ -59,6 +59,9 @@ private:
 
 	sf::RectangleShape m_displayBox2;
 	sf::Text m_displayText2;
+
+	sf::RectangleShape m_displayBox3;
+	sf::Text m_displayText3;
 	
 	// Background (Graphic)
 	sf::Texture m_backgroundT;
