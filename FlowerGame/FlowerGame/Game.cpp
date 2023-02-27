@@ -103,6 +103,37 @@ void Game::processKeys(sf::Event t_event)
 		{
 			m_graphicMode = !m_graphicMode;
 		}
+		// Difficulty
+		if (sf::Keyboard::Up == t_event.key.code) // Up
+		{
+			if (m_difficulty == "Easy")
+			{
+				m_difficulty = "Medium";
+			}
+			else if (m_difficulty == "Medium")
+			{
+				m_difficulty = "Hard";
+			}
+			else // Hard
+			{
+				m_difficulty = "Easy";
+			}
+		}
+		if (sf::Keyboard::Down==t_event.key.code) // Down
+		{
+			if (m_difficulty == "Hard")
+			{
+				m_difficulty = "Medium";
+			}
+			else if (m_difficulty == "Medium")
+			{
+				m_difficulty = "Easy";
+			}
+			else // Easy
+			{
+				m_difficulty = "Hard";
+			}
+		}
 	}
 }
 
@@ -116,7 +147,7 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	if (m_titleScreen) // Constantly check for graphic toggle
+	if (m_titleScreen) // Constantly check for graphic toggle + difficulty
 	{
 		setupTitleText();
 	}
@@ -143,7 +174,7 @@ void Game::render()
 
 		m_window.draw(m_displayBox3);
 		m_window.draw(m_displayText3);
-		// m_window.draw(m_difficulty);
+		m_window.draw(m_difficultyText);
 	}
 	else // Game
 	{
@@ -338,14 +369,32 @@ void Game::setupTitleText()
 	// Do later
 	if (m_difficulty == "Easy")
 	{
-
+		m_difficultyText.setFont(m_ArialBlackfont);
+		m_difficultyText.setString("Easy");
+		m_difficultyText.setPosition(340.0f, 325.0f);
+		m_difficultyText.setCharacterSize(40U);
+		m_difficultyText.setOutlineColor(sf::Color::Black);
+		m_difficultyText.setFillColor(sf::Color::Yellow);
+		m_difficultyText.setOutlineThickness(3.0f);
 	}
 	else if (m_difficulty == "Medium")
 	{
-
+		m_difficultyText.setFont(m_ArialBlackfont);
+		m_difficultyText.setString("Medium");
+		m_difficultyText.setPosition(340.0f, 325.0f);
+		m_difficultyText.setCharacterSize(40U);
+		m_difficultyText.setOutlineColor(sf::Color::Black);
+		m_difficultyText.setFillColor(sf::Color::Yellow);
+		m_difficultyText.setOutlineThickness(3.0f);
 	}
 	else // Hard
 	{
-
+		m_difficultyText.setFont(m_ArialBlackfont);
+		m_difficultyText.setString("Hard");
+		m_difficultyText.setPosition(340.0f, 325.0f);
+		m_difficultyText.setCharacterSize(40U);
+		m_difficultyText.setOutlineColor(sf::Color::Black);
+		m_difficultyText.setFillColor(sf::Color::Yellow);
+		m_difficultyText.setOutlineThickness(3.0f);
 	}
 }

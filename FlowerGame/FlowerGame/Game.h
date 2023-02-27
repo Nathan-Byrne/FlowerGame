@@ -63,9 +63,10 @@ private:
 	sf::RectangleShape m_displayBox2;
 	sf::Text m_displayText2;
 
+	std::string m_difficulty{ "Easy" }; // cover screen for hard
 	sf::RectangleShape m_displayBox3;
 	sf::Text m_displayText3;
-	std::string m_difficulty{ "Easy" }; // cover screen for hard
+	sf::Text m_difficultyText;
 	
 	// Background (Graphic)
 	sf::Texture m_backgroundT;
